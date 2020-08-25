@@ -2,13 +2,21 @@
 const createLevel = (height, width=height) => {
     // let level = document.createElement('div'); 
     let level = []; 
+    let yOff = 0; 
     // level.classList.add('level');  
     for (let i = 0; i < height; i++){
         // create array to hold arrays of divs 
         let row = []; 
+        let xOff = 0; 
         for (let j = 0; j < width; j++){
+            // create noise value using P5JS 
+            // const newNoise = P5.noise(xOff, yOff); 
+            let newNoise = 0; 
+            for (let i = 1; i < 2; i+= 0.5){
+                newNoise += 0.7/i * (P5.noise(i * xOff, i * yOff));
+            }
             row.push({
-                // element: rect(j,i,cellWidth,cellHeight),
+                noise: newNoise,
                 x: j, 
                 y: i,
             }); 
