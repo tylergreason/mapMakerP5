@@ -27,8 +27,10 @@ const createLevel = (height, width=height) => {
                 y: i,
                 type: type
             }); 
+            xOff += 0.3;
         }
-        level.push(row); 
+        level.push(row);
+        yOff += 0.3; 
     }
     return level; 
 }
