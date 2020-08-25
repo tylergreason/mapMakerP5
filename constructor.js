@@ -15,10 +15,17 @@ const createLevel = (height, width=height) => {
             for (let i = 1; i < 2; i+= 0.5){
                 newNoise += 0.7/i * (P5.noise(i * xOff, i * yOff));
             }
+            let type; 
+            if (newNoise < 0.5){
+                type = 'water'
+            }else{
+                type = 'not-water'
+            }
             row.push({
                 noise: newNoise,
                 x: j, 
                 y: i,
+                type: type
             }); 
         }
         level.push(row); 
@@ -29,7 +36,7 @@ const createLevel = (height, width=height) => {
 // this file runs functions to actually create the map
 const levelWidth = 100 //number of tiles wide
 const levelHeight = levelWidth;
-let newLevel = createLevel(levelHeight);
+let newLevel = createLevel(mapWidth);
 
 
 
@@ -42,18 +49,3 @@ for (let i = 0; i < randomCloudNumber; i++){
     // turn off clouds for now 
     // generateCloud(map)
 }
-
-// test making the land and water dependent on the cell's noise value 
-newLevel.forEach(row => {
-    row.forEach(cell => {
-        // console.log(cell.element.style);
-        if (cell.noise < 0.5){
-            cell.element.style.backgroundColor = `rgb(0,0,${250 * (cell.noise * 2)})`
-        }else if (cell.noise > 0.5 && cell.noise < 0.55){
-            cell.element.style.backgroundColor = `#e2d9bc`
-        }else {
-            // cell.element.style.backgroundColor = `rgb(0,${250 * (1-cell.noise * 2)},0)`
-            cell.element.style.backgroundColor = `rgb(0,${250 * (cell.noise)},0)`
-        }
-    })
-})
