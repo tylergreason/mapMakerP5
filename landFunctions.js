@@ -1,3 +1,6 @@
+let P5 = new p5() 
+
+
 // function to fill level with one type of glyph
 const fillWithGlyph = (level, glyph) => {
     level.forEach(row => {
@@ -68,28 +71,6 @@ const applyNoise = (level,inc) => {
             xOff += inc 
         })
         yOff += inc; 
-    })
-}
-
-// functions to append ridge tiles to the bottom of tree tiles
-const applyRidge = (level, glyphToTarget) => {
-    level.forEach((row, h) => {
-        if (level[h+1]){
-            row.forEach((cell, w) => {
-                if (
-                    cell.glyph === glyphToTarget.name
-                    &&
-                    level[h+1][w].glyph === 'water'
-                ){
-                    // stop water cell's animation 
-                    if (level[h+1][w].element.getAnimations()[0]){
-                        level[h+1][w].getAnimations()[0].cancel()
-                    }
-                    // make the element below this element a ridge element
-                    applyStyles(ridge, newLevel[h+1][w])
-                }
-            })
-        }
     })
 }
 
