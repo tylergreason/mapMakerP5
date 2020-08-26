@@ -20,26 +20,28 @@ function setup() {
   function draw() {
     frameRate(0);
     newLevel.forEach((row, i) => {
-            row.forEach((cell, j) => {
-                // let cell = newLevel[i][j];
-                if (cell.noise > 0.55){
-                    fill(0,250 * (cell.noise),0)
-                    rect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
-                }
-                if (cell.noise > 0.5 && cell.noise < 0.55){
-                    fill(`#e2d9bc`)
-                    rect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
-                }
-                if (cell.noise < 0.5){
-                    fill(0,0,250 * (cell.noise * 2))
-                    rect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
-                }
-            })
-        })   
+        row.forEach((cell, j) => {
+            //land tiles 
+            if (cell.noise > landLine){
+                fill(0,250 * (cell.noise),0)
+                rect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
+            }
+            // shore tiles 
+            if (cell.noise > waterLine && cell.noise < landLine){
+                fill(`#e2d9bc`)
+                rect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
+            }
+            // water tiles 
+            if (cell.noise < waterLine){
+                fill(0,0,250 * (cell.noise * 2))
+                rect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
+            }
+        })
+    })   
     // ocean waves 
     newLevel.forEach((row, i) => {
         row.forEach((cell, j) => {
-                if (cell.noise < 0.5){
+                if (cell.noise < waterLine){
                     fill(0,0,250 * (cell.noise * 2))
                     rect(i * cellWidth, 
                         j * cellHeight, 
