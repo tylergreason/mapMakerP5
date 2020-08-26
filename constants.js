@@ -1,5 +1,5 @@
-let cellWidth = 15; 
+let cellWidth = 10; 
 const cellHeight = cellWidth; 
-const mapWidth = 200; 
+const mapWidth = 100; 
 const mapHeight = mapWidth; 
 const P5 = new p5; 
