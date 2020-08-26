@@ -8,3 +8,5 @@ const P5 = new p5;
 const waterLine = 0.5; 
 // const shoreLine = waterLine + 0.05; 
 const landLine = 0.05 + waterLine; 
+
+const rotationValue = 30;

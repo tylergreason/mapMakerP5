@@ -1,12 +1,20 @@
 function setup() {
-    createCanvas(mapWidth * cellWidth, mapHeight * cellHeight);
+    // createCanvas(mapWidth * cellWidth, mapHeight * cellHeight);
+    createCanvas(2000,2000)
     noStroke()
+    angleMode(DEGREES); 
 }
 
 function draw() {
-    frameRate(5);
+    frameRate(0);
+    // rotate(-rotationValue)
+    noStroke();
+    translate((mapWidth * cellWidth)/4, mapWidth/3)
+    
     newLevel.forEach((row, i) => {
         row.forEach((cell, j) => {
+            // rotate(-rotationValue)
+            // translate((mapWidth * cellWidth),0)
             // water tiles 
             fill(0)
             if (cell.noise < waterLine){
@@ -21,14 +29,16 @@ function draw() {
             //land tiles 
             if (cell.noise > landLine){
                 fill(0,250 * (cell.noise),0)
-                let scaledHeight = cellHeight * (3 * (cell.noise) * -1); 
+                let scaledHeight = cellHeight * (4 * (cell.noise) * -1); 
                 // console.log(scaledHeight);
                 // stroke(0)
                 rect(i * cellWidth, j * (cellHeight) + cellHeight, cellWidth, scaledHeight);
-                // noStroke();
             }
+            // rotate(rotationValue);
         })
-    })   
+    })       
+    // rotate(rotationValue)
+    // translate(0, -30)
     // ocean waves 
     newLevel.forEach((row, i) => {
         row.forEach((cell, j) => {
