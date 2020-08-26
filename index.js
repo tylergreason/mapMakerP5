@@ -4,7 +4,7 @@ function setup() {
 }
 
 function draw() {
-    frameRate(0);
+    frameRate(5);
     newLevel.forEach((row, i) => {
         row.forEach((cell, j) => {
             // water tiles 
@@ -21,9 +21,11 @@ function draw() {
             //land tiles 
             if (cell.noise > landLine){
                 fill(0,250 * (cell.noise),0)
-                let scaledHeight = cellHeight * (5 * (cell.noise)); 
-                console.log(scaledHeight);
-                rect(i * cellWidth, j * cellHeight, cellWidth, 40);
+                let scaledHeight = cellHeight * (3 * (cell.noise) * -1); 
+                // console.log(scaledHeight);
+                // stroke(0)
+                rect(i * cellWidth, j * (cellHeight) + cellHeight, cellWidth, scaledHeight);
+                // noStroke();
             }
         })
     })   
@@ -38,14 +40,6 @@ function draw() {
                     //     randomBetweenNumbers(cellHeight, 1.5)
                     //     );
                 // }
-                if (cell.noise > landLine){
-                    fill(0,250 * (cell.noise),0)
-                    let scaledHeight = cellHeight * (5 * (cell.noise) * -1); 
-                    console.log(scaledHeight);
-                    // stroke(0)
-                    rect(i * cellWidth, j * cellHeight, cellWidth, scaledHeight);
-                    noStroke();
-                }
         })
     })
   }     
