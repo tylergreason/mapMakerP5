@@ -6,9 +6,10 @@ function setup() {
 }
 
 function draw() {
+    background(0);
     frameRate(0);
     noStroke();
-    translate((mapWidth * cellWidth)/4, mapWidth/2)
+    translate(mapHeight * cellHeight, mapHeight * cellHeight/2)
     
     drawMap(newLevel)    
   }     
