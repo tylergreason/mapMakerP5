@@ -87,14 +87,17 @@ const terraces = (noise, levels) => {
 const drawMap = level => {
     level.forEach((row, h) => {
         row.forEach((cell, w) => {
+            let xPos = (h * cellHeight); 
+            let yPos = (w * cellWidth)
+
             if (cell.noise < waterLine){
                 fill(0,0,250 * (cell.noise * 2))
-                rect(h * cellWidth, w * cellHeight, cellHeight, cellHeight);
+                rect(xPos, yPos, cellHeight, cellHeight);
             }
             // // shore tiles 
             if (cell.noise > waterLine && cell.noise < landLine){
                 fill(`#e2d9bc`)
-                rect(h * cellWidth, w * cellHeight, cellWidth, cellHeight);
+                rect(xPos, yPos, cellWidth, cellHeight);
             }
             //land tiles 
             if (cell.noise > landLine){
@@ -102,7 +105,7 @@ const drawMap = level => {
                 let scaledHeight = cellHeight * (4 * (cell.noise) * -1); 
                 // console.log(scaledHeight);
                 // stroke(0)
-                rect(h * cellWidth, w * (cellHeight) + cellHeight, cellWidth, scaledHeight);
+                rect(xPos, yPos + cellHeight, cellWidth, scaledHeight);
             }
         })
     })
