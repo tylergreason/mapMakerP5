@@ -3,7 +3,7 @@ const createLevel = (height, width=height) => {
     // let level = document.createElement('div'); 
     let level = []; 
     let yOff = 0; 
-    let inc = 0.1; 
+    let inc = noiseInc; 
     // level.classList.add('level');  
     for (let i = 0; i < height; i++){
         // create array to hold arrays of divs 

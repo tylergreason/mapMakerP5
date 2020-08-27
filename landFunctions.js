@@ -44,33 +44,6 @@ const applyStyles = (glyph, cell) => {
     cell.glyph = glyph.name; 
 }
 
-// function to apply noise values to level 
-const applyNoise = (level,inc) => {
-    // iterate over level and store noise value in that element's dataset 
-    // inc is by how much the xOff and yOff will increment upwards and determins how radical changes are
-    let yOff = 0; 
-    level.forEach(row => {
-        xOff = 0; 
-        row.forEach(cell => {
-            // create noise value using P5JS 
-            // const newNoise = P5.noise(xOff, yOff); 
-            let newNoise = 0; 
-            for (let i = 1; i < 2; i+= 0.5){
-                newNoise += 0.7/i * (P5.noise(i * xOff, i * yOff));
-            }
-
-            // const newNoise = (P5.noise(xOff, yOff)
-            //                     + (0.1 * P5.noise(2*xOff, 2*yOff))
-            //                     + (0.1 * P5.noise(4*xOff, 4*yOff))
-            //                     )
-                cell.noise = newNoise; 
-                // cell.noise = terraces(newNoise, 10); 
-            xOff += inc 
-        })
-        yOff += inc; 
-    })
-}
-
 // function to make terraces according to the article below 
 // https://www.redblobgames.com/maps/terrain-from-noise/#terraces
 const terraces = (noise, levels) => {
@@ -109,5 +82,48 @@ const drawMap = level => {
                 rect(xPos, yPos+cellHeight, cellWidth, scaledHeight);
             }
         })
+    })
+}
+
+// function to make sure the map is drawn in the order of cells, hightest to lowest 
+const drawSortedMap = level => {
+    let sortedLevel = combineAndSort(level, noise); 
+    sortedLevel.forEach(cell => {
+        let yPos = ((cell.x * cellHeight) + ( cell.y * cellWidth))/2
+        let xPos = ((cell.x * cellWidth) - (cell.y * cellHeight ))/2.1
+        let n = cell.noise;
+        let scaledHeight;  
+        if (n < waterLine){
+            scaledHeight = cellHeight * (n * extremeHeight)
+            fill(0,0,250 * (cell.noise * 2))
+            rect(xPos, yPos, cellHeight, cellHeight);
+        }else{
+            scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
+            // console.log(scaledHeight); 
+            // // shore tiles 
+            if (cell.noise > waterLine && cell.noise < landLine){
+                fill(`#e2d9bc`)
+                rect(xPos, yPos + cellHeight, cellWidth, scaledHeight);
+            }
+            //land tiles 
+            if (cell.noise > landLine && cell.noise < mountainLine){
+                fill(
+                    0, 
+                    (180 * (cell.noise)) + (Math.random()*5),
+                    0)
+                // console.log(scaledHeight);
+                // stroke(0)
+                rect(xPos, yPos + cellHeight, cellWidth, scaledHeight);
+            }
+            if (cell.noise > mountainLine && cell.noise < snowLine){
+                fill(100 + (Math.random()*10)); 
+                rect(xPos, yPos + cellHeight, cellWidth, scaledHeight);
+            }
+            else if (cell.noise > snowLine){
+                fill(255); 
+                rect(xPos, yPos + cellHeight, cellWidth, scaledHeight);
+            }
+        }
+
     })
 }
