@@ -9,7 +9,7 @@ function draw() {
     background(0);
     frameRate(0);
     noStroke();
-    translate(mapHeight * cellHeight, mapHeight * cellHeight/2)
+    translate(0.5 * (mapHeight * cellHeight), cellHeight * 4)
     
     drawMap(newLevel)    
   }     

@@ -87,7 +87,7 @@ const terraces = (noise, levels) => {
 const drawMap = level => {
     level.forEach((row, h) => {
         row.forEach((cell, w) => {
-            let yPos = ((h * cellHeight) + ( w * cellWidth))
+            let yPos = ((h * cellHeight) + ( w * cellWidth))/2
             let xPos = ((w * cellWidth) - (h * cellHeight ))/2.1
             let scaledHeight = cellHeight * -(4 * (cell.noise)); 
 

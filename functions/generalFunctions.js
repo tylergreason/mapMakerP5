@@ -40,3 +40,18 @@ const mergeByValue = (leftArray, rightArray, value) => {
 
     return returnArray.concat(leftArray.slice(leftIndex)).concat(rightArray.slice(rightIndex));
 }
+
+const combineAndSort = (level, value) => {
+    // combine arrays into one array 
+    let returnArray = []; 
+    level.forEach(row => row.forEach(cell => returnArray.push(cell))); 
+    return returnArray.sort((a, b) => {
+        if (a[value] < b[value]){
+            return -1
+        }
+        if (a[value] > b[value]){
+            return 1
+        }
+        return 0 
+    }) 
+}
