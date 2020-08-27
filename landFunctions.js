@@ -82,3 +82,28 @@ const terraces = (noise, levels) => {
         }
     }
 }
+
+
+const drawMap = level => {
+    level.forEach((row, h) => {
+        row.forEach((cell, w) => {
+            if (cell.noise < waterLine){
+                fill(0,0,250 * (cell.noise * 2))
+                rect(h * cellWidth, w * cellHeight, cellHeight, cellHeight);
+            }
+            // // shore tiles 
+            if (cell.noise > waterLine && cell.noise < landLine){
+                fill(`#e2d9bc`)
+                rect(h * cellWidth, w * cellHeight, cellWidth, cellHeight);
+            }
+            //land tiles 
+            if (cell.noise > landLine){
+                fill(0,250 * (cell.noise),0)
+                let scaledHeight = cellHeight * (4 * (cell.noise) * -1); 
+                // console.log(scaledHeight);
+                // stroke(0)
+                rect(h * cellWidth, w * (cellHeight) + cellHeight, cellWidth, scaledHeight);
+            }
+        })
+    })
+}
