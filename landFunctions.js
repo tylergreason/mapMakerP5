@@ -95,34 +95,10 @@ const drawSortedMap = level => {
         let scaledHeight;  
         if (n < waterLine){
             scaledHeight = cellHeight * (n * extremeHeight)
-            fill(0,0,250 * (cell.noise * 2))
-            rect(xPos, yPos, cellHeight, cellHeight);
+            drawCell(xPos, yPos, cellWidth, scaledHeight, n)   
         }else{
             scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
-            // console.log(scaledHeight); 
-            // // shore tiles 
-            if (cell.noise > waterLine && cell.noise < landLine){
-                fill(`#e2d9bc`)
-                rect(xPos, yPos + cellHeight, cellWidth, scaledHeight);
-            }
-            //land tiles 
-            if (cell.noise > landLine && cell.noise < mountainLine){
-                fill(
-                    0, 
-                    (180 * (cell.noise)) + (Math.random()*5),
-                    0)
-                // console.log(scaledHeight);
-                // stroke(0)
-                rect(xPos, yPos + cellHeight, cellWidth, scaledHeight);
-            }
-            if (cell.noise > mountainLine && cell.noise < snowLine){
-                fill(100 + (Math.random()*10)); 
-                rect(xPos, yPos + cellHeight, cellWidth, scaledHeight);
-            }
-            else if (cell.noise > snowLine){
-                fill(255); 
-                rect(xPos, yPos + cellHeight, cellWidth, scaledHeight);
-            }
+            drawCell(xPos,yPos + cellHeight,cellWidth, scaledHeight, n)
         }
 
     })
@@ -130,7 +106,16 @@ const drawSortedMap = level => {
 
 // function to draw rectangles 
 const drawCell = (x,y,width,height,noise) => {
-    if (noise > waterLine && noise < landLine){
+    // make fill value with landFills 
+    landFills(noise); 
+    rect(x,y,width,height); 
+}
+
+const landFills = noise => {
+    if (noise < waterLine){
+        fill(0,0,250 * (noise * 2))
+    }
+    else if (noise > waterLine && noise < landLine){
         fill(
             0,
             0,
@@ -145,11 +130,5 @@ const drawCell = (x,y,width,height,noise) => {
         fill(100 + (Math.random()*10)); 
     }else {
         fill(255); 
-    }
-}
-
-const landFills = noise => {
-    if (noise < waterLine){
-        return fill()
     }
 }
