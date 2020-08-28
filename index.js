@@ -11,6 +11,4 @@ function draw() {
     noStroke();
     translate((mapHeight * cellHeight)/2, cellHeight * 4)
     drawSortedMap(newLevel)    
-    translate(-(mapHeight * cellHeight)/2, -cellHeight * 4)
-
   }     

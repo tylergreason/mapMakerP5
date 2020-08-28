@@ -110,9 +110,9 @@ const landFills = noise => {
     }
     else if (noise > waterLine && noise < landLine){
         fill(
-            215,
-            207,
-            182
+            215 + (Math.random()*20),
+            207+ (Math.random()*20),
+            182+ (Math.random()*20)
             )
     }else if (noise > landLine && noise < mountainLine){
         fill(
