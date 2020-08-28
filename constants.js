@@ -1,12 +1,12 @@
 let cellWidth = 10; 
 const cellHeight = cellWidth; 
-const mapWidth = 500; 
+const mapWidth = 100; 
 const mapHeight = mapWidth;
-const noiseInc = 0.03;
+const noiseInc = 0.05;
 const P5 = new p5;
 
 // highest or lowest cells should be displayed 
-const extremeHeight = 10; 
+const extremeHeight = 20; 
 
 // points in noise at which terrain types come into effect 
 const waterLine = 0.5; 

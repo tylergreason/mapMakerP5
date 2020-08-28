@@ -56,7 +56,7 @@ const terraces = (noise, levels) => {
     }
 }
 
-
+// below method is not used, in favor of the drawSortedMap function below 
 const drawMap = level => {
     level.forEach((row, h) => {
         row.forEach((cell, w) => {
@@ -126,4 +126,30 @@ const drawSortedMap = level => {
         }
 
     })
+}
+
+// function to draw rectangles 
+const drawCell = (x,y,width,height,noise) => {
+    if (noise > waterLine && noise < landLine){
+        fill(
+            0,
+            0,
+            250 * (noise * 2)
+            )
+    }else if (noise > landLine && noise < mountainLine){
+        fill(
+            0, 
+            (180 * (noise)) + (Math.random()*5),
+            0)
+    }else if (noise > mountainLine && noise < snowLine){
+        fill(100 + (Math.random()*10)); 
+    }else {
+        fill(255); 
+    }
+}
+
+const landFills = noise => {
+    if (noise < waterLine){
+        return fill()
+    }
 }
