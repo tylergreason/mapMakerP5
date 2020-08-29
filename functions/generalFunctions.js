@@ -6,11 +6,7 @@ const mergeSort = (array,value = false) => {
     const middle = Math.floor(array.length/2)
     const leftArray = array.slice(0,middle); 
     const rightArray = array.slice(middle); 
-    if (value){
-        return mergeByValue(mergeSort(leftArray), mergeSort(rightArray), value); 
-    } else {
-        return mergeByValue(mergeSort(leftArray), mergeSort(rightArray)); 
-    }
+    return mergeByValue(mergeSort(leftArray,value), mergeSort(rightArray,value), value); 
 }
 
 const mergeByValue = (leftArray, rightArray, value) => {
@@ -53,3 +49,24 @@ const combineAndSort = (level, value) => {
         return 0 
     }) 
 }
+
+// function to turn matrix into one dimensional array 
+const flattenMatrix = matrix => {
+    let returnArray = []; 
+    matrix.forEach(row => {
+        row.forEach(cell => {
+            returnArray.push(cell); 
+        })
+    })
+    return returnArray; 
+}
+let s = [3,1,2,5,4]
+
+let e = [{a: 300}, {a: 1}, {a: 2}, {a: 5}, {a: 4}]
+console.log(s);
+console.log(mergeSort(s))
+e.forEach(i => console.log(i.a))
+e = mergeSort(e, 'a')
+let string = ''
+e.forEach(i =>string = string.concat(i.a + ' '))
+console.log(string);

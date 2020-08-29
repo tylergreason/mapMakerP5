@@ -77,7 +77,9 @@ const drawMap = level => {
 
 // function to make sure the map is drawn in the order of cells, hightest to lowest 
 const drawSortedMap = level => {
-    let sortedLevel = combineAndSort(level, noise); 
+    // let sortedLevel = combineAndSort(level, noise); 
+    // make level into one array first
+    let sortedLevel = flattenMatrix(level); 
     sortedLevel.forEach(cell => {
         let yPos = ((cell.x * cellHeight) + ( cell.y * cellWidth))/2
         let xPos = ((cell.x * cellWidth) - (cell.y * cellHeight ))/2.1
