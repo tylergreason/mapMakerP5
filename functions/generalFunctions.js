@@ -4,7 +4,6 @@ const mergeSort = (array,value = false) => {
     }
 
     const middle = Math.floor(array.length/2)
-
     const leftArray = array.slice(0,middle); 
     const rightArray = array.slice(middle); 
     if (value){
@@ -37,7 +36,6 @@ const mergeByValue = (leftArray, rightArray, value) => {
             }
         }
     }
-
     return returnArray.concat(leftArray.slice(leftIndex)).concat(rightArray.slice(rightIndex));
 }
 
