@@ -13,4 +13,4 @@ function draw() {
     translate((mapHeight * cellHeight/2), mapHeight *1)
     drawSortedMap(newLevel)  
     // startingScale = 1;  
-  }     
+}     

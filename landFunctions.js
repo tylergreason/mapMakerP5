@@ -81,19 +81,20 @@ const drawSortedMap = level => {
     // make level into one array first
     let sortedLevel = flattenMatrix(level); 
     sortedLevel.forEach(cell => {
-        let yPos = ((cell.x * cellHeight) + ( cell.y * cellWidth))/2
         let xPos = ((cell.x * cellWidth) - (cell.y * cellHeight ))/2.1
+        let yPos = ((cell.x * cellHeight) + ( cell.y * cellWidth))/3
         // let xPos = cell.x * cellWidth
         // let yPos = cell.y * cellHeight
         let n = cell.noise;
         let scaledHeight;  
         if (n < waterLine){
             scaledHeight = cellHeight * (n * extremeHeight)
+            scaledHeight = cellHeight
             drawCell(xPos, yPos, cellWidth, scaledHeight, n)   
         }else{
             // scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
-            scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
-            drawCell(xPos,yPos + cellHeight,cellWidth, scaledHeight, n)
+            scaledHeight = cellHeight
+            drawCell(xPos,yPos,cellWidth, scaledHeight, n)
         }
 
     })
@@ -105,34 +106,35 @@ const drawSortedMap = level => {
 const drawCell = (x,y,width,height,noise) => {
     // make fill value with landFills 
     landFills(noise); 
-    rect(x,y,width,height); 
+    // rect(x,y,width,height); 
     // fill(255,0,0)
     // push()
     // shearX(2)
     // shearY(0.5)
     // rect(x,y,width,height)
     // pop()
-    // quad(
-    //     x,y,
-    //     x+cellWidth, y - cellHeight/2,
-    //     x+cellWidth, y+cellHeight/2,
-    //     x, y+cellHeight
-    //     )
-    //     fill(0,255,0)
-    // quad(
-    //     x,y,
-    //     x+cellWidth, y - cellHeight/2,
-    //     x+cellWidth, y+cellHeight/2,
-    //     x, y+cellHeight
-    //     )
-    //     fill(0,0,255)
-    // quad(
-    //     x,y,
-    //     x+cellWidth, y - cellHeight/2,
-    //     x+cellWidth, y+cellHeight/2,
-    //     x, y+cellHeight
-    //     )
 
+
+        quad(
+            x,y,
+            x + width/2, y + height/3,
+            x, y + height/1.5,
+            x + -width/2, y + height/3
+        )
+    // debugger
+        quad(
+            x, y + height/1.5,
+            x + width/2, y + height/3,
+            x + width/2,y + height,
+            x,y + (4 * height/3)
+        )
+
+        quad(
+            x,y + height/1.5,
+            x + -width/2,y + height/3,
+            x + -width/2,y + height,
+            x,y + (4 * height/3)
+        )
 
 }
 
