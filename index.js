@@ -1,14 +1,16 @@
 function setup() {
     // createCanvas(mapWidth * cellWidth, mapHeight * cellHeight);
-    createCanvas(cellWidth * mapWidth, cellHeight * mapHeight)
+    createCanvas(cellWidth * mapWidth * 2, cellHeight * mapHeight * 2)
     noStroke()
     angleMode(DEGREES); 
+    rotate(45)
 }
 
 function draw() {
     background(0);
+    // scale(startingScale)
     frameRate(0);
-    noStroke();
-    translate((mapHeight * cellHeight)/2, cellHeight * 4)
-    drawSortedMap(newLevel)    
+    translate((mapHeight * cellHeight/2), mapHeight *1)
+    drawSortedMap(newLevel)  
+    // startingScale = 1;  
   }     

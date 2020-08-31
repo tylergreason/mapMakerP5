@@ -83,18 +83,22 @@ const drawSortedMap = level => {
     sortedLevel.forEach(cell => {
         let yPos = ((cell.x * cellHeight) + ( cell.y * cellWidth))/2
         let xPos = ((cell.x * cellWidth) - (cell.y * cellHeight ))/2.1
+        // let xPos = cell.x * cellWidth
+        // let yPos = cell.y * cellHeight
         let n = cell.noise;
         let scaledHeight;  
         if (n < waterLine){
             scaledHeight = cellHeight * (n * extremeHeight)
             drawCell(xPos, yPos, cellWidth, scaledHeight, n)   
         }else{
-            scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
-            drawCell(xPos,yPos + cellHeight,cellWidth, scaledHeight, n)
+                scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
+                drawCell(xPos,yPos + cellHeight,cellWidth, scaledHeight, n)
         }
 
     })
 }
+
+
 
 // function to draw rectangles 
 const drawCell = (x,y,width,height,noise) => {
