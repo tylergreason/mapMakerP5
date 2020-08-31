@@ -88,11 +88,12 @@ const drawSortedMap = level => {
         let n = cell.noise;
         let scaledHeight;  
         if (n < waterLine){
-            scaledHeight = cellHeight * (n * extremeHeight)
-            drawCell(xPos, yPos, cellWidth, scaledHeight, n)   
+            // scaledHeight = cellHeight * (n * extremeHeight)
+            // drawCell(xPos, yPos, cellWidth, scaledHeight, n)   
         }else{
-                scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
-                drawCell(xPos,yPos + cellHeight,cellWidth, scaledHeight, n)
+            // scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
+            scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
+            drawCell(xPos,yPos + cellHeight,cellWidth, scaledHeight, n)
         }
 
     })
@@ -103,8 +104,36 @@ const drawSortedMap = level => {
 // function to draw rectangles 
 const drawCell = (x,y,width,height,noise) => {
     // make fill value with landFills 
-    landFills(noise); 
-    rect(x,y,width,height); 
+    // landFills(noise); 
+    // rect(x,y,width,height); 
+    fill(255,0,0)
+    push()
+    shearX(2)
+    shearY(0.5)
+    rect(x,y,width,height)
+    pop()
+    // quad(
+    //     x,y,
+    //     x+cellWidth, y - cellHeight/2,
+    //     x+cellWidth, y+cellHeight/2,
+    //     x, y+cellHeight
+    //     )
+    //     fill(0,255,0)
+    // quad(
+    //     x,y,
+    //     x+cellWidth, y - cellHeight/2,
+    //     x+cellWidth, y+cellHeight/2,
+    //     x, y+cellHeight
+    //     )
+    //     fill(0,0,255)
+    // quad(
+    //     x,y,
+    //     x+cellWidth, y - cellHeight/2,
+    //     x+cellWidth, y+cellHeight/2,
+    //     x, y+cellHeight
+    //     )
+
+
 }
 
 const landFills = noise => {
