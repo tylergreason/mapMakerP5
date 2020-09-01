@@ -89,11 +89,10 @@ const drawSortedMap = level => {
         let scaledHeight;  
         if (n < waterLine){
             scaledHeight = cellHeight * (n * extremeHeight)
-            // scaledHeight = cellHeight
             drawCell(xPos, yPos + cellHeight, cellWidth, scaledHeight, n)   
         }else{
-            scaledHeight = cellHeight
             scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
+            scaledHeight = cellHeight * (n * extremeHeight)
             drawCell(xPos,yPos + cellHeight,cellWidth, scaledHeight, n)
         }
 
@@ -105,62 +104,58 @@ const drawSortedMap = level => {
 // function to draw rectangles 
 const drawCell = (x,y,width,height,noise) => {
     // make fill value with landFills 
-    landFills(noise); 
-    // rect(x,y,width,height); 
-    // fill(255,0,0)
-    // push()
-    // shearX(2)
-    // shearY(0.5)
-    // rect(x,y,width,height)
-    // pop()
-
-
     // create a cube for each value of n * 10 
     let newNoise, newY; 
+    landFills(noise); 
+    newNoise = noise * extremeHeight; 
+    newY = y - (cellHeight * newNoise)
+    newY = y - height;
+    // draw 3 quads representing a vertical cube 
+    quadRight(x,y,width,newY)
+    quadLeft(x,y,width,newY)
+    quadTop(x,y,width,newY)
     if (noise <= waterLine){ 
         // keep the water level constant at the waterLine
-        newNoise = Math.floor((waterLine- 0.0) * extremeHeight)
-        newY = y - (cellHeight * newNoise)
+        newY = y - (cellHeight * Math.floor(waterLine * extremeHeight))
         fill(0,0,255,200)
-        quad(
-            x,newY,
-            x + width/2, newY + cellHeight/3,
-            x, newY + cellHeight/1.5,
-            x + -width/2, newY + cellHeight/3
-            )
-    }else{
-        newNoise = noise * extremeHeight; 
-        newY = y - (cellHeight * newNoise)
-        // draw 3 quads representing a vertical cube 
-        // right side 
-        quad(
-            x, newY + cellHeight/1.5,
-            x + width/2, newY + cellHeight/3,
-            x + width/2,y + cellHeight,
-            x,y + (4 * cellHeight/3)
-            )
-        // left side 
-        quad(
-            x, newY + cellHeight/1.5,
-            x - width/2,newY + cellHeight/3,
-            x - width/2, y + cellHeight,
-            x,y + (4 * cellHeight/3)
-            )
-        // top
-        quad(
-            x,newY,
-            x + width/2, newY + cellHeight/3,
-            x, newY + cellHeight/1.5,
-            x + -width/2, newY + cellHeight/3
-            )
+        quadTop(x,y,width,newY)
     }
+}
+
+// functions for making the parts of a cube tile 
+const quadTop = (x,y,width,height) => {
+    quad(
+        x,height,
+        x + width/2, height + cellHeight/3,
+        x, height + cellHeight/1.5,
+        x + -width/2, height + cellHeight/3
+        )
+}
+
+const quadLeft = (x,y,width,height) => {
+    quad(
+        x, height + cellHeight/1.5,
+        x - width/2, height + cellHeight/3,
+        x - width/2, y + cellHeight,
+        x,y + (4 * cellHeight/3)
+        )
+}
+
+const quadRight = (x,y,width,height) => {
+    quad(
+        x, height + cellHeight/1.5,
+        x + width/2, height + cellHeight/3,
+        x + width/2,y + cellHeight,
+        x,y + (4 * cellHeight/3)
+        )
 }
 
 const landFills = noise => {
     if (noise < waterLine){
-        fill(0,
-            0,
-            250 * (noise)+70
+        fill(
+            215 + (Math.random()*20),
+            207+ (Math.random()*20),
+            182+ (Math.random()*20)
             )
     }
     else if (noise > waterLine && noise < landLine){
