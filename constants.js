@@ -1,4 +1,4 @@
-let cellWidth = 10; 
+let cellWidth = 20; 
 const cellHeight = cellWidth; 
 const mapWidth = 100; 
 const mapHeight = mapWidth;

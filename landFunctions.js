@@ -117,17 +117,7 @@ const drawCell = (x,y,width,height,noise) => {
 
     // create a cube for each value of n * 10 
     let newNoise = Math.floor(noise * 10); 
-    let newY = y + cellHeight * newNoise
-    // fill(255,0,0)
-    quad(
-            x,newY,
-            x + width/2, newY + cellHeight/3,
-            x, newY + cellHeight/1.5,
-            x + -width/2, newY + cellHeight/3
-        )
-    // debugger
-    // fill(0,0,0)
-
+    let newY = y - (cellHeight * newNoise)
     quad(
         x, newY + cellHeight/1.5,
         x + width/2, newY + cellHeight/3,
@@ -135,12 +125,18 @@ const drawCell = (x,y,width,height,noise) => {
         x,y + (4 * cellHeight/3)
         )
         
+    quad(
+        x, newY + cellHeight/1.5,
+        x - width/2,newY + cellHeight/3,
+        x - width/2, y + cellHeight,
+        x,y + (4 * cellHeight/3)
+        )
 
-        quad(
-            x,newY + cellHeight/1.5,
-            x + -width/2,newY + cellHeight/3,
-            x + -width/2, y + cellHeight,
-            x,y + (4 * cellHeight/3)
+    quad(
+        x,newY,
+        x + width/2, newY + cellHeight/3,
+        x, newY + cellHeight/1.5,
+        x + -width/2, newY + cellHeight/3
         )
 }
 
