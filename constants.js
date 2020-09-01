@@ -1,10 +1,10 @@
-let cellWidth = 20; 
+const cellWidth = 10; 
 const cellHeight = cellWidth; 
 const mapWidth = 100; 
 const mapHeight = mapWidth;
 const noiseInc = 0.05;
 const P5 = new p5;
-let startingScale = 1; 
+const startingScale = 1; 
 // highest or lowest cells should be displayed 
 const extremeHeight = 10; 
 
