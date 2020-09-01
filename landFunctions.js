@@ -89,8 +89,8 @@ const drawSortedMap = level => {
         let scaledHeight;  
         if (n < waterLine){
             scaledHeight = cellHeight * (n * extremeHeight)
-            scaledHeight = cellHeight
-            drawCell(xPos, yPos, cellWidth, scaledHeight, n)   
+            // scaledHeight = cellHeight
+            drawCell(xPos, yPos + cellHeight, cellWidth, scaledHeight, n)   
         }else{
             scaledHeight = cellHeight
             scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
@@ -116,28 +116,44 @@ const drawCell = (x,y,width,height,noise) => {
 
 
     // create a cube for each value of n * 10 
-    let newNoise = Math.floor(noise * 10); 
-    let newY = y - (cellHeight * newNoise)
-    quad(
-        x, newY + cellHeight/1.5,
-        x + width/2, newY + cellHeight/3,
-        x + width/2,y + cellHeight,
-        x,y + (4 * cellHeight/3)
-        )
-        
-    quad(
-        x, newY + cellHeight/1.5,
-        x - width/2,newY + cellHeight/3,
-        x - width/2, y + cellHeight,
-        x,y + (4 * cellHeight/3)
-        )
-
-    quad(
-        x,newY,
-        x + width/2, newY + cellHeight/3,
-        x, newY + cellHeight/1.5,
-        x + -width/2, newY + cellHeight/3
-        )
+    let newNoise, newY; 
+    if (noise <= waterLine){ 
+        // keep the water level constant at the waterLine
+        newNoise = Math.floor((waterLine- 0.0) * extremeHeight)
+        newY = y - (cellHeight * newNoise)
+        fill(0,0,255,200)
+        quad(
+            x,newY,
+            x + width/2, newY + cellHeight/3,
+            x, newY + cellHeight/1.5,
+            x + -width/2, newY + cellHeight/3
+            )
+    }else{
+        newNoise = noise * extremeHeight; 
+        newY = y - (cellHeight * newNoise)
+        // draw 3 quads representing a vertical cube 
+        // right side 
+        quad(
+            x, newY + cellHeight/1.5,
+            x + width/2, newY + cellHeight/3,
+            x + width/2,y + cellHeight,
+            x,y + (4 * cellHeight/3)
+            )
+        // left side 
+        quad(
+            x, newY + cellHeight/1.5,
+            x - width/2,newY + cellHeight/3,
+            x - width/2, y + cellHeight,
+            x,y + (4 * cellHeight/3)
+            )
+        // top
+        quad(
+            x,newY,
+            x + width/2, newY + cellHeight/3,
+            x, newY + cellHeight/1.5,
+            x + -width/2, newY + cellHeight/3
+            )
+    }
 }
 
 const landFills = noise => {
