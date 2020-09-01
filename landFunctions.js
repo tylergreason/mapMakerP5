@@ -92,9 +92,9 @@ const drawSortedMap = level => {
             scaledHeight = cellHeight
             drawCell(xPos, yPos, cellWidth, scaledHeight, n)   
         }else{
-            // scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
             scaledHeight = cellHeight
-            drawCell(xPos,yPos,cellWidth, scaledHeight, n)
+            scaledHeight = (cellHeight * -((n-waterLine) * extremeHeight) - cellHeight);
+            drawCell(xPos,yPos + cellHeight,cellWidth, scaledHeight, n)
         }
 
     })
@@ -115,27 +115,33 @@ const drawCell = (x,y,width,height,noise) => {
     // pop()
 
 
-        quad(
-            x,y,
-            x + width/2, y + height/3,
-            x, y + height/1.5,
-            x + -width/2, y + height/3
+    // create a cube for each value of n * 10 
+    let newNoise = Math.floor(noise * 10); 
+    let newY = y + cellHeight * newNoise
+    // fill(255,0,0)
+    quad(
+            x,newY,
+            x + width/2, newY + cellHeight/3,
+            x, newY + cellHeight/1.5,
+            x + -width/2, newY + cellHeight/3
         )
     // debugger
-        quad(
-            x, y + height/1.5,
-            x + width/2, y + height/3,
-            x + width/2,y + height,
-            x,y + (4 * height/3)
+    // fill(0,0,0)
+
+    quad(
+        x, newY + cellHeight/1.5,
+        x + width/2, newY + cellHeight/3,
+        x + width/2,y + cellHeight,
+        x,y + (4 * cellHeight/3)
         )
+        
 
         quad(
-            x,y + height/1.5,
-            x + -width/2,y + height/3,
-            x + -width/2,y + height,
-            x,y + (4 * height/3)
+            x,newY + cellHeight/1.5,
+            x + -width/2,newY + cellHeight/3,
+            x + -width/2, y + cellHeight,
+            x,y + (4 * cellHeight/3)
         )
-
 }
 
 const landFills = noise => {
