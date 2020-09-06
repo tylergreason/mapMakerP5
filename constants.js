@@ -6,7 +6,7 @@ const noiseInc = 0.05;
 const P5 = new p5;
 const startingScale = 1; 
 // highest or lowest cells should be displayed 
-const extremeHeight = 10; 
+const extremeHeight = 100; 
 
 // points in noise at which terrain types come into effect 
 const waterLine = 0.5; 

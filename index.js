@@ -7,6 +7,8 @@ function setup() {
         )
     noStroke()
     angleMode(DEGREES); 
+    rotateZ(900);
+    // rotateX(180);
 }
 
 let sortedLevel = flattenMatrix(newLevel); 
@@ -14,16 +16,14 @@ let sortedLevel = flattenMatrix(newLevel);
 
 function draw() {
     background(0);
-    frameRate(10);
-    push()
+    frameRate(0);
+    rotateX(250);
     translate(
         (mapHeight*cellHeight /-2),
         mapHeight*cellHeight/-2
         )
     //     drawSortedMap(sortedLevel)
     draw3dMap(sortedLevel)
-    pop()
-    rotateX(frameCount * 0.01);
-    rotateY(frameCount * 0.01);
+
     // startingScale = 1;  
 }     

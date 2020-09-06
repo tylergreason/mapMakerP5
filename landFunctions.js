@@ -105,8 +105,21 @@ const draw3dMap = level => {
         let yPos = cell.y * cellHeight; 
         // set color
         landFills(cell.noise); 
-        rect(xPos, yPos, cellWidth, cellHeight, 100); 
+        push() 
+            translate(xPos, yPos)
+            box(cellWidth, cellHeight, extremeHeight * cell.noise); 
+        pop()
     })
+    // draw water plane 
+    push()
+        fill(0,0,255,255/2)
+        translate(
+            mapHeight*cellHeight /2,
+            mapHeight*cellHeight/2,
+            - waterLine * 0.5 * extremeHeight
+            )
+        plane(mapWidth * cellWidth, mapHeight * cellHeight); 
+    pop()
 }
 
 // function to draw rectangles 
