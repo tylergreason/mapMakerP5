@@ -1,13 +1,12 @@
 function setup() {
     // createCanvas(mapWidth * cellWidth, mapHeight * cellHeight);
     createCanvas(
-        cellWidth * mapWidth * 2,
-        cellHeight * mapHeight * 2,
+        cellWidth * mapWidth * 1.5,
+        cellHeight * mapHeight*1.5,
         WEBGL
         )
     noStroke()
     angleMode(DEGREES); 
-    rotate(45)
 }
 
 let sortedLevel = flattenMatrix(newLevel); 
@@ -15,14 +14,16 @@ let sortedLevel = flattenMatrix(newLevel);
 
 function draw() {
     background(0);
-    // scale(startingScale)
-    frameRate(0);
+    frameRate(10);
     push()
     translate(
-        (mapHeight * cellHeight/2),
-        mapHeight * cellHeight/4
+        (mapHeight*cellHeight /-2),
+        mapHeight*cellHeight/-2
         )
-        drawSortedMap(sortedLevel)
+    //     drawSortedMap(sortedLevel)
+    draw3dMap(sortedLevel)
     pop()
+    rotateX(frameCount * 0.01);
+    rotateY(frameCount * 0.01);
     // startingScale = 1;  
 }     

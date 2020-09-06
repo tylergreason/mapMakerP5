@@ -98,7 +98,16 @@ const drawSortedMap = level => {
     })
 }
 
-
+const draw3dMap = level => {
+    // assumes level has been sorted into one long array 
+    level.forEach(cell => {
+        let xPos = cell.x * cellWidth; 
+        let yPos = cell.y * cellHeight; 
+        // set color
+        landFills(cell.noise); 
+        rect(xPos, yPos, cellWidth, cellHeight, 100); 
+    })
+}
 
 // function to draw rectangles 
 const drawCell = (x,y,width,height,noise) => {
