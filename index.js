@@ -1,6 +1,6 @@
 function setup() {
     // createCanvas(mapWidth * cellWidth, mapHeight * cellHeight);
-    createCanvas(cellWidth * mapWidth * 1, cellHeight * mapHeight * 1)
+    createCanvas(cellWidth * mapWidth * 1, cellHeight * mapHeight * 1, WEBGL)
     noStroke()
     angleMode(DEGREES); 
     rotate(45)
@@ -9,7 +9,7 @@ function setup() {
 function draw() {
     background(0);
     // scale(startingScale)
-    frameRate(0);
+    // frameRate(0);
     translate(
         (mapHeight * cellHeight/2),
         mapHeight * cellHeight/4
