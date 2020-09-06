@@ -3,7 +3,7 @@ function setup() {
     createCanvas(
         cellWidth * mapWidth * 2,
         cellHeight * mapHeight * 2,
-        // WEBGL
+        WEBGL
         )
     noStroke()
     angleMode(DEGREES); 
@@ -16,11 +16,13 @@ let sortedLevel = flattenMatrix(newLevel);
 function draw() {
     background(0);
     // scale(startingScale)
-    // frameRate(0);
+    frameRate(0);
+    push()
     translate(
         (mapHeight * cellHeight/2),
         mapHeight * cellHeight/4
         )
-    drawSortedMap(sortedLevel)
+        drawSortedMap(sortedLevel)
+    pop()
     // startingScale = 1;  
 }     

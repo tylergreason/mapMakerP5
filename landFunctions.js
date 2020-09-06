@@ -167,7 +167,9 @@ const landFills = noise => {
         fill(
             0, 
             (180 * (noise)) + (Math.random()*5),
-            0)
+            0
+            )
+            
     }else if (noise > mountainLine && noise < snowLine){
         fill(100 + (Math.random()*10)); 
     }else {

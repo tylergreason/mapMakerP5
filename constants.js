@@ -1,6 +1,6 @@
 const cellWidth = 10; 
 const cellHeight = cellWidth; 
-const mapWidth = 100; 
+const mapWidth = 50; 
 const mapHeight = mapWidth;
 const noiseInc = 0.05;
 const P5 = new p5;

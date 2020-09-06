@@ -60,13 +60,3 @@ const flattenMatrix = matrix => {
     })
     return returnArray; 
 }
-let s = [3,1,2,5,4]
-
-let e = [{a: 300}, {a: 1}, {a: 2}, {a: 5}, {a: 4}]
-console.log(s);
-console.log(mergeSort(s))
-e.forEach(i => console.log(i.a))
-e = mergeSort(e, 'a')
-let string = ''
-e.forEach(i =>string = string.concat(i.a + ' '))
-console.log(string);
