@@ -79,8 +79,7 @@ const drawMap = level => {
 const drawSortedMap = level => {
     // let sortedLevel = combineAndSort(level, noise); 
     // make level into one array first
-    let sortedLevel = flattenMatrix(level); 
-    sortedLevel.forEach(cell => {
+    level.forEach(cell => {
         let xPos = ((cell.x * cellWidth) - (cell.y * cellHeight ))/2.1
         let yPos = ((cell.x * cellHeight) + ( cell.y * cellWidth))/3
         // let xPos = cell.x * cellWidth
